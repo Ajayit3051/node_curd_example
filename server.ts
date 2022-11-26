@@ -3,8 +3,12 @@ import dotenv from 'dotenv';
 import {DBUtil} from "./db/DBUtil";
 import contactRouter from "./router/contactRouter";
 import groupRouter from "./router/groupRouter";
+import cors from 'cors';
 
 const app: express.Application = express(); // initialize the express js
+
+// configure cors policy
+app.use(cors());
 
 // configure dot-env
 dotenv.config({

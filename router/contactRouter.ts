@@ -55,11 +55,7 @@ contactRouter.post('/', [
         };
         let contactResponse = await new ContactCollection(newContact).save();
         if (contactResponse) {
-            return response.status(200).json({
-                data: contactResponse,
-                msg: 'Contact is Created',
-                status: APP_CONSTANTS.SUCCESS
-            });
+            return response.status(200).json(contactResponse);
         }
     } catch (error) {
         console.log(error);
@@ -80,11 +76,7 @@ contactRouter.post('/', [
 contactRouter.get("/", async (request: Request, response: Response) => {
     try {
         let contacts = await ContactCollection.find();
-        return response.status(200).json({
-            data: contacts,
-            msg: '',
-            status: APP_CONSTANTS.SUCCESS
-        })
+        return response.status(200).json(contacts)
     } catch (error) {
         console.log(error);
         return response.status(500).json({
@@ -115,11 +107,7 @@ contactRouter.get("/:contactId", async (request: Request, response: Response) =>
                 status: APP_CONSTANTS.FAILED
             });
         }
-        return response.status(200).json({
-            data: contact,
-            msg: '',
-            status: APP_CONSTANTS.SUCCESS
-        })
+        return response.status(200).json(contact)
     } catch (error) {
         if (!mongoose.isValidObjectId(contactId)) {
             return response.status(500).json({
@@ -190,11 +178,7 @@ contactRouter.put('/:contactId', [
             $set: newContact
         }, {new: true})
         if (contactResponse) {
-            return response.status(200).json({
-                data: contactResponse,
-                msg: 'Contact is Updated',
-                status: APP_CONSTANTS.SUCCESS
-            });
+            return response.status(200).json(contactResponse);
         }
     } catch (error) {
         console.log(error);
@@ -228,11 +212,7 @@ contactRouter.delete("/:contactId", async (request: Request, response: Response)
         // delete the contact
         let theContact = await ContactCollection.findByIdAndDelete(mongoContactId);
         if (theContact) {
-            return response.status(200).json({
-                data: theContact,
-                msg: 'Contact is Deleted',
-                status: APP_CONSTANTS.SUCCESS
-            })
+            return response.status(200).json({})
         }
     } catch (error) {
         if (!mongoose.isValidObjectId(contactId)) {

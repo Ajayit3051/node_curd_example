@@ -42,11 +42,7 @@ groupRouter.post('/', [
         };
         let groupResponse = await new GroupCollection(newGroup).save();
         if (groupResponse) {
-            return response.status(200).json({
-                data: groupResponse,
-                msg: 'Group is Created',
-                status: APP_CONSTANTS.SUCCESS
-            });
+            return response.status(200).json(groupResponse);
         }
     } catch (error) {
         return response.status(500).json({
@@ -66,11 +62,7 @@ groupRouter.post('/', [
 groupRouter.get('/', async (request: Request, response: Response) => {
     try {
         let groups = await GroupCollection.find(); // select * from groups;
-        return response.status(200).json({
-            data: groups,
-            msg: '',
-            status: APP_CONSTANTS.SUCCESS
-        });
+        return response.status(200).json(groups);
     } catch (error) {
         return response.status(500).json({
             msg: 'Server Error',
@@ -98,11 +90,7 @@ groupRouter.get('/:groupId', async (request: Request, response: Response) => {
                 status: APP_CONSTANTS.FAILED
             });
         }
-        return response.status(200).json({
-            data: group,
-            msg: '',
-            status: APP_CONSTANTS.SUCCESS
-        });
+        return response.status(200).json(group);
     } catch (error) {
         if (!mongoose.isValidObjectId(groupId)) {
             return response.status(500).json({

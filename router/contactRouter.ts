@@ -108,7 +108,8 @@ contactRouter.get("/:contactId", async (request: Request, response: Response) =>
             });
         }
         return response.status(200).json(contact)
-    } catch (error) {
+    } 
+    catch (error) {
         if (!mongoose.isValidObjectId(contactId)) {
             return response.status(500).json({
                 msg: 'Invalid Contact Id',
@@ -180,7 +181,8 @@ contactRouter.put('/:contactId', [
         if (contactResponse) {
             return response.status(200).json(contactResponse);
         }
-    } catch (error) {
+    } 
+    catch (error) {
         console.log(error);
         return response.status(500).json({
             msg: 'Server Error',

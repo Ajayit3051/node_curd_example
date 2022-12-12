@@ -87,8 +87,8 @@ groupRouter.get('/:groupId', async (request: Request, response: Response) => {
             return response.status(404).json({
                 msg: 'Group is not found',
                 data: null,
-                // status: APP_CONSTANTS.FAILED
-                status:APP_CONSTANTS.FAILED
+                status: APP_CONSTANTS.FAILED
+                
             });
         }
         return response.status(200).json(group);
